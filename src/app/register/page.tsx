@@ -29,7 +29,7 @@ export default function Register() {
           <Button variant="default">회원가입</Button>
         </CardContent>
         <CardFooter>
-          <p>
+          <p className="text-sm">
             아이디가 있다면? &nbsp;
             <Link href="/login">
               <span className="text-gray-500">로그인</span>
