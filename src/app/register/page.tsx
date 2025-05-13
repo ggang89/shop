@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
+import { RegisterAction } from "@/lib/actions";
 
 const schema = z
   .object({
@@ -28,7 +29,7 @@ const schema = z
     message: "비밀번호가 일치하지 않습니다.",
   });
 
-type FormSchema = z.infer<typeof schema>;
+export type FormSchema = z.infer<typeof schema>;
 
 export default function Register() {
   const {
@@ -44,8 +45,17 @@ export default function Register() {
       passwordConfirm: "",
     },
   });
-  const onSubmit: SubmitHandler<FormSchema> = (data) =>
-    console.log("registerData", data);
+  const onSubmit: SubmitHandler<FormSchema> = async(data) => {
+    
+    // 받은 data를 서버액션에 보내준다.
+    const result= await RegisterAction(data);
+    //console.log("registerData", result);
+
+    if (result.isOK) {
+      alert("회원가입이 완료되었습니다.");
+    }
+
+  }
 
   return (
     <form
