@@ -16,12 +16,13 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
+import {LoginAction} from "@/lib/actions";
 
 const schema = z.object({
   email: z.string().trim().email("이메일 또는 비밀번호가 올바르지 않습니다."),
   password: z.string().trim().min(8, "비밀번호가 올바르지 않습니다."),
 });
-type FormSchema = z.infer<typeof schema>;
+export type FormLoginSchema = z.infer<typeof schema>;
 
 export default function Login() {
   const {
@@ -29,7 +30,7 @@ export default function Login() {
     handleSubmit,
 
     formState: { errors },
-  } = useForm<FormSchema>({
+  } = useForm<FormLoginSchema>({
     resolver: zodResolver(schema),
     defaultValues: {
       email: "",
@@ -37,8 +38,23 @@ export default function Login() {
     },
   });
 
-  const onSubmit: SubmitHandler<FormSchema> = (data) =>
-    console.log("loginData", data);
+  const onSubmit: SubmitHandler<FormLoginSchema> = async (data) => {
+    //console.log("loginData", data);
+    // 서버에 로그인 요청을 보낸다
+    const result = await LoginAction(data);
+    
+    console.log("loginResult", result);
+
+    if (result?.isOK == false) {
+      alert(result.message)
+    }
+    if(result?.isOK == true) {
+      alert(result.message);
+     
+      // 로그인 성공 시, 메인 페이지로 이동
+     // window.location.href = "/";
+    } 
+  };
 
   return (
     <form

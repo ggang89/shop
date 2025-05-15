@@ -45,17 +45,15 @@ export default function Register() {
       passwordConfirm: "",
     },
   });
-  const onSubmit: SubmitHandler<FormSchema> = async(data) => {
-    
+  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
     // 받은 data를 서버액션에 보내준다.
-    const result= await RegisterAction(data);
+    const result = await RegisterAction(data);
     //console.log("registerData", result);
 
     if (result.isOK) {
       alert("회원가입이 완료되었습니다.");
     }
-
-  }
+  };
 
   return (
     <form
