@@ -1,8 +1,7 @@
-// 회원가입
-// 3. 발급된 jwt 토큰을 쿠키에 저장한다
 
 'use server';
-
+// 회원가입
+import jwt from "jsonwebtoken";
 import { FormSchema } from "@/app/register/page";
 import { prisma } from "./script";
 import { FormLoginSchema } from "@/app/login/page";
@@ -52,10 +51,19 @@ export async function LoginAction(data: FormLoginSchema) {
   }
 
   // 5. 비밀번호가 맞으면, jwt 토큰을 발급한다.
+  const token = jwt.sign(
+    {
+    id: user.id,
+    email: user.email,
+  }, process.env.JWT_SECRET as string, {
+    expiresIn: "1h",
+  }
+  );
 
+  
   return {
     isOK: true,
     message: "로그인 성공",
-    user,
+    token,
   };
 }

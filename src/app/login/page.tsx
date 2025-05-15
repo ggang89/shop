@@ -16,7 +16,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
-import {LoginAction} from "@/lib/actions";
 
 const schema = z.object({
   email: z.string().trim().email("이메일 또는 비밀번호가 올바르지 않습니다."),
@@ -41,19 +40,30 @@ export default function Login() {
   const onSubmit: SubmitHandler<FormLoginSchema> = async (data) => {
     //console.log("loginData", data);
     // 서버에 로그인 요청을 보낸다
-    const result = await LoginAction(data);
-    
-    console.log("loginResult", result);
+
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
+      // body는 data를 JSON 문자열로 변환한 것
+      credentials: "include", // 쿠키를 포함해서 요청을 보낸다
+      //https://developer.mozilla.org/ko/docs/Web/API/Request/credentials
+    });
+    //console.log("loginResult", result);
+    const result = await res.json();
 
     if (result?.isOK == false) {
-      alert(result.message)
-    }
-    if(result?.isOK == true) {
       alert(result.message);
-     
+    }
+    if (result?.isOK == true) {
+      alert(result.message);
+
       // 로그인 성공 시, 메인 페이지로 이동
-     // window.location.href = "/";
-    } 
+      // window.location.href = "/";
+    }
   };
 
   return (
