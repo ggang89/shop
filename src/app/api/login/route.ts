@@ -30,6 +30,8 @@ export async function POST(req: NextRequest) {
 
   const response = NextResponse.json({ isOK: true, message: "로그인 성공" });
 
+  //https://developer.mozilla.org/ko/docs/Web/API/Headers
+  //https://ko.javascript.info/cookie
   response.headers.set(
     "Set-Cookie",
     serialize("token", token, {
@@ -40,6 +42,7 @@ export async function POST(req: NextRequest) {
       secure: process.env.NODE_ENV === "production",
     })
   );
+  console.log("현재 NODE_ENV:", process.env.NODE_ENV);
 
   return response;
 }
