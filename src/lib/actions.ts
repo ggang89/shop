@@ -1,10 +1,10 @@
 
 'use server';
 // 회원가입
-import jwt from "jsonwebtoken";
-import { FormSchema } from "@/app/register/page";
+//import jwt from "jsonwebtoken";
+import { FormSchema } from "@/app/(noAuth)/register/page";
 import { prisma } from "./script";
-import { FormLoginSchema } from "@/app/login/page";
+//import { FormLoginSchema } from "@/app/login/page";
 
 export async function RegisterAction(formData: FormSchema) { 
   // 1. form에서 입력받은 데이터를 db에 저장한다
@@ -25,45 +25,45 @@ export async function RegisterAction(formData: FormSchema) {
 
 
 // 로그인
-export async function LoginAction(data: FormLoginSchema) {
-  // 1. form에서 입력받은 아이디가 db에 있는지 확인한다.
-  const user = await prisma.user.findUnique({
-    where: {
-      email: data.email,
-    },
-  });
+// export async function LoginAction(data: FormLoginSchema) {
+//   // 1. form에서 입력받은 아이디가 db에 있는지 확인한다.
+//   const user = await prisma.user.findUnique({
+//     where: {
+//       email: data.email,
+//     },
+//   });
 
-  // 2. 아이디가 없으면, 아이디를 찾을 수 없다고 에러 전송
-  if (!user) {
-    return {
-      isOK: false,
-      message: "아이디가 없습니다.",
-    };
-  }
-  // 3. 아이디가 있으면, 비밀번호가 맞는지 확인한다.
-  // 4. 비밀번호가 틀리면, 비밀번호가 틀렸다고 에러 전송
+//   // 2. 아이디가 없으면, 아이디를 찾을 수 없다고 에러 전송
+//   if (!user) {
+//     return {
+//       isOK: false,
+//       message: "아이디가 없습니다.",
+//     };
+//   }
+//   // 3. 아이디가 있으면, 비밀번호가 맞는지 확인한다.
+//   // 4. 비밀번호가 틀리면, 비밀번호가 틀렸다고 에러 전송
 
-  if (user.password !== data.password) {
-    return {
-      isOK: false,
-      message: "비밀번호가 틀렸습니다.",
-    };
-  }
+//   if (user.password !== data.password) {
+//     return {
+//       isOK: false,
+//       message: "비밀번호가 틀렸습니다.",
+//     };
+//   }
 
-  // 5. 비밀번호가 맞으면, jwt 토큰을 발급한다.
-  const token = jwt.sign(
-    {
-    id: user.id,
-    email: user.email,
-  }, process.env.JWT_SECRET as string, {
-    expiresIn: "1h",
-  }
-  );
+//   // 5. 비밀번호가 맞으면, jwt 토큰을 발급한다.
+//   const token = jwt.sign(
+//     {
+//     id: user.id,
+//     email: user.email,
+//   }, process.env.JWT_SECRET as string, {
+//     expiresIn: "1h",
+//   }
+//   );
 
   
-  return {
-    isOK: true,
-    message: "로그인 성공",
-    token,
-  };
-}
+//   return {
+//     isOK: true,
+//     message: "로그인 성공",
+//     token,
+//   };
+// }

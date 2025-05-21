@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+
+import LinkComponents from "../components/nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,11 +23,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const noAuthLinks = [
+    { href: "/login", title: "로그인" },
+    { href: "/register", title: "회원가입" },
+  ];
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <LinkComponents link={noAuthLinks} />
         {children}
       </body>
     </html>

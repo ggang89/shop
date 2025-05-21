@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
   email: z.string().trim().email("이메일 또는 비밀번호가 올바르지 않습니다."),
@@ -25,6 +26,8 @@ const schema = z.object({
 export type FormLoginSchema = z.infer<typeof schema>;
 
 export default function Login() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -71,7 +74,10 @@ export default function Login() {
     try {
       const res = await axios.post("/api/login", data);
       alert(res.data.message);
-    }catch (error) {
+      if (res.data.isOK == true) {
+        router.push("/protect");
+      }
+    } catch (error) {
       console.log("error", error);
     }
   };
