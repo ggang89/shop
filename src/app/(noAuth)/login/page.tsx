@@ -98,7 +98,11 @@ export default function Login() {
             placeholder="example@example.com"
             {...register("email")}
           />
-          {errors.email && <span>이메일 또는 비밀번호가 틀렸습니다.</span>}
+          {errors.email && (
+            <span className="text-red-500 text-xs">
+              이메일 또는 비밀번호가 틀렸습니다.
+            </span>
+          )}
           <Label htmlFor="password">Password</Label>
           <Input
             type="password"
@@ -106,7 +110,11 @@ export default function Login() {
             placeholder="********"
             {...register("password")}
           />
-          {errors.password && <span>아이디 또는 비밀번호가 틀렸습니다.</span>}
+          {errors.password && (
+            <span className="text-red-500  text-xs">
+              아이디 또는 비밀번호가 틀렸습니다.
+            </span>
+          )}
           <Button type="submit" variant="default">
             로그인
           </Button>

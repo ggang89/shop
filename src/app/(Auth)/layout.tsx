@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-
+import "../globals.css";
 import Nav from "../components/nav";
 
 const geistSans = Geist({
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const authLinks = [
-    { href: "/", title: "로그아웃" },
+    { href: "/logout", title: "로그아웃" },
     { href: "/user", title: "내 페이지" },
   ];
   return (

@@ -7,13 +7,15 @@ import { sessionOptions } from "@/lib/session";
 
 export async function GET(req: NextRequest) {
   const session = await getIronSession(await cookies(), sessionOptions);
+  console.log("get session", new URL(req.url).searchParams);
+
   return NextResponse.json({
     isOK: true,
     session,
   });
 }
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
 
   const user = await prisma.user.findUnique({ where: { email } });
@@ -47,7 +49,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   //   id: user.id,
   //   email: user.email,
   // };
-
+  session.isLoggedIn = true;
   await session.save();
 
   const response = NextResponse.json({ isOK: true, message: "로그인 성공" });

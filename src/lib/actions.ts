@@ -2,7 +2,7 @@
 'use server';
 // 회원가입
 //import jwt from "jsonwebtoken";
-import { FormSchema } from "@/app/(noAuth)/register/page";
+import { FormSchema } from "@/app/(noauth)/register/page";
 import { prisma } from "./script";
 //import { FormLoginSchema } from "@/app/login/page";
 
