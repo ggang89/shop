@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
 export default function Logout() {
+  
   return (
     <Card className="m-auto  my-40 h-[250px]">
       <CardTitle>로그아웃</CardTitle>

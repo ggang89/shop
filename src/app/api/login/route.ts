@@ -7,7 +7,7 @@ import { sessionOptions } from "@/lib/session";
 
 export async function GET(req: NextRequest) {
   const session = await getIronSession(await cookies(), sessionOptions);
-  console.log("get session", new URL(req.url).searchParams);
+  //console.log("get session", new URL(req.url).searchParams);
 
   return NextResponse.json({
     isOK: true,
