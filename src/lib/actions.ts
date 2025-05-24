@@ -4,18 +4,22 @@
 //import jwt from "jsonwebtoken";
 import { FormSchema } from "@/app/(noauth)/register/page";
 import { prisma } from "./script";
-//import { FormLoginSchema } from "@/app/login/page";
+import bcrypt from "bcrypt";
 
 export async function RegisterAction(formData: FormSchema) { 
+  
+  // 비밀번호 암호화
+  const securePassword = await bcrypt.hash(formData.password, 10);
+  
   // 1. form에서 입력받은 데이터를 db에 저장한다
   const user = await prisma.user.create({
     data: {
       email: formData.email,
       name: formData.name,
-      password: formData.password,
-      passwordConfirm: formData.passwordConfirm
+      password: securePassword,
+      passwordConfirm: formData.passwordConfirm,
     },
-  })
+  });
   // 2. 저장에 성공
   return {
     isOK: true,

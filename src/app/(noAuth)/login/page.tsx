@@ -78,7 +78,15 @@ export default function Login() {
         router.push("/protect");
       }
     } catch (error) {
-      console.log("error", error);
+      //console.log("error", error);
+      if (axios.isAxiosError(error)) {
+        // Axios 에러 처리
+        const errorMessage = error.response?.data.message || "로그인 실패";
+        alert(errorMessage);
+      } else {
+        // 일반 에러 처리
+        alert("로그인 중 오류가 발생했습니다.");
+      }
     }
   };
 

@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
 import { RegisterAction } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 const schema = z
   .object({
@@ -32,6 +33,8 @@ const schema = z
 export type FormSchema = z.infer<typeof schema>;
 
 export default function Register() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -53,6 +56,9 @@ export default function Register() {
     if (result.isOK) {
       alert("회원가입이 완료되었습니다.");
     }
+
+    // 회원가입이 완료되면, 로그인 페이지로 이동한다.
+    router.push("/login");
   };
 
   return (
