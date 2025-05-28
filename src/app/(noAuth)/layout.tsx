@@ -36,7 +36,7 @@ export default function RootLayout({
       >
         <LinkComponents link={noAuthLinks} />
         {children}
-        <footer className="flex justify-center items-center py-5">
+        <footer className="flex justify-center items-end  py-5">
           All right reserved. <Smile />
         </footer>
       </body>
