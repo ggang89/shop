@@ -1,10 +1,13 @@
-//import { useState } from "react";
+'use client';
+
 import Image from "next/image";
 import CountryList from "../components/travel-list";
 import { Products } from "@/lib/product";
 
 export default function Home() {
-  // const { product, setProduct } = useState<Product>([]);
+  const loginAlert = () => {
+    alert("로그인 후 이용 가능합니다.");
+ }
   return (
     <div>
       <header className=" text-3xl font-bold text-center p-5">
@@ -30,19 +33,19 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="flex flex-wrap justify-center gap-10 p-10">
+        <div className="flex flex-wrap justify-center gap-10 p-10 ">
           {Products.map((product) => (
             <div
               key={product.key}
-              className="bg-gray-50 rounded-lg p-5 item-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="w-[400px]  rounded-lg p-5 item-center shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+              onClick={loginAlert}
             >
               <Image
                 src={product.image}
-                width={300}
-                height={300}
                 alt={product.name}
+                className="w-full h-48 object-cover rounded-lg mb-3"
               />
-              <p className="text-2xl font-bold text-center text-sky-700">
+              <p className="text-2xl font-bold text-center text-sky-700 mb-2">
                 {" "}
                 {product.country}
               </p>

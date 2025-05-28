@@ -21,7 +21,9 @@ export const Products = [
     price: 1000,
     country: "Africa",
     image: africa,
-    description: "#사파리 #초원의 바람 #대자연",
+    keyword: "#사파리 #대자연 #초원의 바람",
+    description:
+      "별빛이 초원을 덮고 사파리의 숨결이 바람에 실려오는 그 순간, 자연의 신비를 느낄 수 있습니다.",
   },
   {
     key: 2,
@@ -29,7 +31,8 @@ export const Products = [
     price: 499,
     country: "Europe",
     image: europe,
-    description: "#분위기 #박물관 #맛집 탐방",
+    keyword: "#분위기 #박물관 #맛집 탐방",
+    description: "위대한 거장의 숨결을 직접 보고 느낄 수 있는 기회! 사진으로만 보던 예술품을 직접 만나보세요",
   },
   {
     key: 3,
@@ -37,7 +40,8 @@ export const Products = [
     price: 99,
     country: "Asia",
     image: asia,
-    description: "#야시장 #사원 #전통마사지",
+    keyword: "#야시장 #사원 #전통마사지",
+    description: "전통 문화와 맛있는 길거리 음식, 전통 마사지로 몸과 마음을 힐링하세요",
   },
   {
     key: 4,
@@ -45,7 +49,8 @@ export const Products = [
     price: 800,
     country: "America",
     image: america,
-    description: "#시티투어 #3대 야경",
+    keyword: "#시티투어 #3대 야경",
+    description: "IT, 영화, 음악 산업의 본거지, 현대 인류의 최첨단 유산을 만나보세요,",
   },
   {
     key: 5,
@@ -53,7 +58,8 @@ export const Products = [
     price: 300,
     country: "Australia",
     image: australia,
-    description: "#오페라하우스 #시드니 #크루즈",
+    keyword: "#오페라하우스 #액티비티 #휴식",
+    description:"인간과 자연의 어울림, 다양한 액티비티와 아름다운 해변을 통해 완벽한 휴식을 즐겨보세요 "
   },
   {
     key: 6,
@@ -61,6 +67,7 @@ export const Products = [
     price: 2000,
     country: "antarctica",
     image: antarctica,
-    description: "#신비로운 자연 #얼음 계곡 #펭귄",
+    keyword: "#신비로운 자연 #얼음 계곡 #펭귄",
+    description: "자연의 웅장함과 귀여운 펭귄들을 만나볼 수 있는 특별한 여행지입니다.",
   },
 ];

@@ -10,7 +10,7 @@ type LinkProps = {
 
 export default function Nav({ link }: LinkProps) {
   return (
-    <nav className="h-[60] bg-gray-950 text-white text-xl flex items-center px-16">
+    <nav className="h-[60] w-screen bg-gray-950 text-white text-xl flex items-center px-16">
       <Link href="/">Logo</Link>
       <div className="flex justify-end ml-auto gap-7">
         {link.map((item) => (
