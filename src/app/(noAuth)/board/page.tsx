@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Table,
   TableBody,
@@ -17,8 +19,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useRouter } from "next/navigation";
 
 export default function BoardPage() {
+  const router = useRouter();
+  const handleLoginRedirect = () => {
+    router.push("/login");
+  };
+
   return (
     <div className="w-full h-svh">
       <AlertDialog>
@@ -33,7 +41,7 @@ export default function BoardPage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>취소</AlertDialogCancel>
-            <AlertDialogAction>로그인 페이지 이동</AlertDialogAction>
+            <AlertDialogAction onClick={handleLoginRedirect}>로그인 페이지 이동</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
