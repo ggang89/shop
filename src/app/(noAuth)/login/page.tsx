@@ -16,8 +16,9 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
-import axios from "axios";
-import { useRouter } from "next/navigation";
+//import axios from "axios";
+//import { useRouter } from "next/navigation";
+import { LoginAction } from "./login";
 
 const schema = z.object({
   email: z.string().trim().email("이메일 또는 비밀번호가 올바르지 않습니다."),
@@ -26,7 +27,7 @@ const schema = z.object({
 export type FormLoginSchema = z.infer<typeof schema>;
 
 export default function Login() {
-  const router = useRouter();
+  // const router = useRouter();
 
   const {
     register,
@@ -71,23 +72,25 @@ export default function Login() {
     // }
 
     // axios로 요청하기
-    try {
-      const res = await axios.post("/api/login", data);
-      alert(res.data.message);
-      if (res.data.isOK == true) {
-        router.push("/protect");
-      }
-    } catch (error) {
-      //console.log("error", error);
-      if (axios.isAxiosError(error)) {
-        // Axios 에러 처리
-        const errorMessage = error.response?.data.message || "로그인 실패";
-        alert(errorMessage);
-      } else {
-        // 일반 에러 처리
-        alert("로그인 중 오류가 발생했습니다.");
-      }
-    }
+    // try {
+    //   const res = await axios.post("/api/login", data);
+    //   alert(res.data.message);
+    //   if (res.data.isOK == true) {
+    //     router.push("/protect");
+    //   }
+    // } catch (error) {
+    //   //console.log("error", error);
+    //   if (axios.isAxiosError(error)) {
+    //     // Axios 에러 처리
+    //     const errorMessage = error.response?.data.message || "로그인 실패";
+    //     alert(errorMessage);
+    //   } else {
+    //     // 일반 에러 처리
+    //     alert("로그인 중 오류가 발생했습니다.");
+    //   }
+    // }
+
+    await LoginAction(data);
   };
 
   return (

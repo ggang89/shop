@@ -17,7 +17,6 @@ export async function RegisterAction(formData: FormSchema) {
       email: formData.email,
       name: formData.name,
       password: securePassword,
-      passwordConfirm: formData.passwordConfirm,
     },
   });
   // 2. 저장에 성공
