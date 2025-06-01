@@ -2,8 +2,31 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SquarePen } from "lucide-react";
 import { Mail } from "lucide-react";
+import { prisma } from "@/lib/script";
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
+import { sessionOptions } from "@/lib/session";
 
-export default function User() {
+type SessionUser = {
+  id: number;
+  email: string;
+  isLoggedIn: boolean;
+};
+
+export default async function User() {
+  const userInfo = await getIronSession<SessionUser>(
+    await cookies(),
+    sessionOptions
+  );
+  const { email: userEmail } = userInfo;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: userEmail,
+    },
+  });
+  //console.log("user22", user);
+
   return (
     <div className="flex-wrap ">
       {/* 프로필 => id / 게시판 글쓰기 탭 */}
@@ -17,10 +40,10 @@ export default function User() {
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <p>홍길동</p>
-          <p>
+          <p className="font-bold text-xl">{user?.name}님</p>
+          <p className="flex items-center gap-1">
             {" "}
-            <Mail />{" "}
+            <Mail /> {user?.email}
           </p>
         </div>
 

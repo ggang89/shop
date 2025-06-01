@@ -40,11 +40,13 @@ export async function LoginAction(data: Params) {
   }
 
   const session = await getIronSession<{
+    name: string;
     id: number;
     email: string;
     isLoggedIn: boolean;
   }>(await cookies(), sessionOptions);
 
+  session.name = user.name;
   session.id = user.id;
   session.email = user.email;
   session.isLoggedIn = true;

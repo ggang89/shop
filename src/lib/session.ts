@@ -8,8 +8,7 @@ import { SessionOptions } from "iron-session";
 //   };
 //   isLoggedIn: boolean;
 // }
-// 
-
+//
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_SECRET as string,
@@ -22,6 +21,7 @@ export const sessionOptions: SessionOptions = {
 declare module "iron-session" {
   interface IronSessionData {
     user?: {
+      name: string;
       id: number;
       email: string;
     };
