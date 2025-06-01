@@ -8,6 +8,7 @@ export default function NoAuthLayout({
   const noAuthLinks = [
     { href: "/login", title: "로그인" },
     { href: "/register", title: "회원가입" },
+    { href: "/board", title: "게시판" },
   ];
 
   return (
