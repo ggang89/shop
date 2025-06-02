@@ -38,7 +38,8 @@ export default function User() {
   console.log("user", user);
   //{id: 4, email: 'abc@abc.com', isLoggedIn: true}
  const writingBorad = () => {
-  alert("게시판 글쓰기 탭으로 이동합니다."); 
+   alert("게시판 글쓰기 탭으로 이동합니다."); 
+    window.location.href = "/write-board";
   }
   
   return (
