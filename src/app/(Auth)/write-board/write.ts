@@ -11,13 +11,14 @@ type Session = {
   email: string;
   isLoggedIn: boolean;
 }
+type FormData = {
+  title: string;
+  content: string;
+}
 
-export default async function PublishAction(formData: FormData) {
-  const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
+export default async function PublishAction({title,content}:FormData) {
 
   const session:Session = await getIronSession(await cookies(), sessionOptions);
-  //console.log("user", session);
   const email = session.email;
   
  
@@ -36,6 +37,9 @@ export default async function PublishAction(formData: FormData) {
       }
     }
   })
-
+  return {
+    isOK: true,
+    message: "게시글이 성공적으로 작성되었습니다.",
+}
  
 }

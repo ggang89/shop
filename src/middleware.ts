@@ -8,9 +8,9 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 로그인 한 사람이 이용할 수 있는 페이지
-  const requireAuthPage = ["/protect", "/user", "/logout"];
+  const requireAuthPage = ["/protect", "/user", "/logout", "/write-board",];
   // 로그인 안 한 사람이 이용할 수 있는 페이지
-  const noAuthPage = ["/login", "/register", "/board"];
+  const noAuthPage = ["/login", "/register",];
 
   // 세션이 없으면(=로그인 안 한 사용자) 로그인 페이지로 리다이렉트
   if (noLogin && requireAuthPage.some((path) => pathname.startsWith(path))) {
@@ -33,6 +33,6 @@ export const config = {
     "/logout",
     "/login",
     "/register",
-    "/board/:path*",
+    "/write-board/:path*",
   ],
 };
