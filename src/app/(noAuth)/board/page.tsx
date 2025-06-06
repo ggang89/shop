@@ -20,12 +20,45 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useRouter } from "next/navigation";
+ import { useEffect, useState } from "react";
+import getPosts from "./get-post";
+
+
+type Post = {
+  id: number;
+  title: string;
+  content: string;
+  author: {
+    name: string;
+    email: string;
+  } 
+  createdAt:Date; //2025-06006T06:20:13.090Z
+}
+
 
 export default function BoardPage() {
+
+ const [posts, setPosts] = useState<Post[]>([]);
+
+
   const router = useRouter();
   const handleLoginRedirect = () => {
     router.push("/login");
   };
+
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const data = await getPosts();
+        setPosts(data);
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    fetchPosts();
+   },[])
+    
 
   return (
     <div className="w-full h-svh">
@@ -41,7 +74,9 @@ export default function BoardPage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>취소</AlertDialogCancel>
-            <AlertDialogAction onClick={handleLoginRedirect}>로그인 페이지 이동</AlertDialogAction>
+            <AlertDialogAction onClick={handleLoginRedirect}>
+              로그인 페이지 이동
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
@@ -62,6 +97,14 @@ export default function BoardPage() {
             <TableCell>관리자</TableCell>
             <TableCell className="text-right">2025.05.28</TableCell>
           </TableRow>
+          {posts.map((post,index) => (
+            <TableRow key={post.id}>
+              <TableCell className="font-medium">{index+1 }</TableCell>
+              <TableCell>{post.title}</TableCell>
+              <TableCell>{post.author.email}</TableCell>
+              <TableCell className="text-right">{new Date(post.createdAt).toLocaleDateString()}</TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>
