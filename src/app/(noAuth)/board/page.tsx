@@ -19,8 +19,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+
+import { ArrowRight } from "lucide-react";
+
 import { useRouter } from "next/navigation";
- import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import getPosts from "./get-post";
 
 
@@ -97,12 +109,35 @@ export default function BoardPage() {
             <TableCell>관리자</TableCell>
             <TableCell className="text-right">2025.05.28</TableCell>
           </TableRow>
-          {posts.map((post,index) => (
+          {posts.map((post, index) => (
             <TableRow key={post.id}>
-              <TableCell className="font-medium">{index+1 }</TableCell>
-              <TableCell>{post.title}</TableCell>
+              <TableCell className="font-medium">{index + 1}</TableCell>
+              <TableCell>
+                {/* {post.title} */}
+
+                <Accordion type="single" collapsible>
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>{post.title}</AccordionTrigger>
+                    <AccordionContent className="flex flex-col gap-4 text-balance">
+                      {/* 글자수 자르기 200자?? */}
+                      <p className="flex items-center gap-2">
+                        {post.content}{" "}
+                        <Link href={`/board/${post.id}`}>
+                          {" "}
+                          <span className="flex text-sm text-gray-500 italic">
+                            {" "}
+                            more <ArrowRight size={15}/>
+                          </span>
+                        </Link>
+                      </p>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </TableCell>
               <TableCell>{post.author.email}</TableCell>
-              <TableCell className="text-right">{new Date(post.createdAt).toLocaleDateString()}</TableCell>
+              <TableCell className="text-right">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
