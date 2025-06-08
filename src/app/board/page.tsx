@@ -109,11 +109,10 @@ export default function BoardPage() {
             <TableCell>관리자</TableCell>
             <TableCell className="text-right">2025.05.28</TableCell>
           </TableRow>
-          {posts.map((post, index) => (
+          {posts.map((post) => (
             <TableRow key={post.id}>
-              <TableCell className="font-medium">{index + 1}</TableCell>
+              <TableCell className="font-medium">{post.id}</TableCell>
               <TableCell>
-                {/* {post.title} */}
 
                 <Accordion type="single" collapsible>
                   <AccordionItem value="item-1">
