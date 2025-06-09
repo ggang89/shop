@@ -48,7 +48,7 @@ export default async function DetailBoardPage({ params }: { params: Params }) {
           <p className="text-right italic">작성자 : {post?.author.email}</p>
           <div className="flex justify-end">
             {isOwner && (
-              <Link href={`/board/${id}/edit`}>
+              <Link href={`/board/${id}/edit`} >
                 <Button className="w-[90px] ">수정하기</Button>
               </Link>
             )}
