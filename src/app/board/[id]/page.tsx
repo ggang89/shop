@@ -13,11 +13,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 type Params = Promise<{
-  id: number;
+  id: string;
 }>;
 
 export default async function DetailBoardPage({ params }: { params: Params }) {
-  const { id } = await params; // params로 받은 id는 string이라서 숫자로 바꿔줘야함
+  const id  = Number((await params).id); // params로 받은 id는 string이라서 숫자로 바꿔줘야함
 
   const posts = await getPosts();
 
@@ -29,7 +29,7 @@ export default async function DetailBoardPage({ params }: { params: Params }) {
   //console.log("sessionUser", session.email);
 
   // posts의 순서와 DB순서가 다름 => id가 같은 post의 글을 보여줌
-  const post = posts.find((post) => post.id === Number(id));
+  const post = posts.find((post) => post.id === id);
   //DB에서 받은 id는 숫자이고, params id는 string이라서 숫자로 바꿔서 비교
   // console.log("post", post);
 

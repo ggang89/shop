@@ -8,6 +8,7 @@ export default async function AuthLayout({
   const authLinks = [
     { href: "/logout", title: "로그아웃" },
     { href: "/user", title: "내 페이지" },
+    { href: "/board", title: "게시판" },
   ];
 
   return (
