@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import CountryList from "../components/travel-list";
@@ -7,7 +7,7 @@ import { Products } from "@/lib/product";
 export default function Home() {
   const loginAlert = () => {
     alert("로그인 후 이용 가능합니다.");
- }
+  };
   return (
     <div>
       <header className=" text-3xl font-bold text-center p-5">
