@@ -1,13 +1,16 @@
-"use client";
+
 
 import Image from "next/image";
+import { prisma } from "@/lib/script";
 import CountryList from "../components/travel-list";
-import { Products } from "@/lib/product";
 
-export default function Home() {
-  const loginAlert = () => {
-    alert("로그인 후 이용 가능합니다.");
-  };
+
+export default async function Home() {
+  
+  const products = await prisma.product.findMany({
+
+  })
+
   return (
     <div>
       <header className=" text-3xl font-bold text-center p-5">
@@ -33,25 +36,27 @@ export default function Home() {
       </section>
 
       <section>
+        
         <div className="flex flex-wrap justify-center gap-10 p-10 ">
-          {Products.map((product) => (
+        
+          {products.map((product) => (
             <div
-              key={product.key}
+              key={product.id}
               className="w-[400px]  rounded-lg p-5 item-center shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
-              onClick={loginAlert}
             >
+              <h2 className="text-2xl font-bold text-center text-sky-700 mb-2">
+                {product.country}
+              </h2>
               <Image
-                src={product.image}
-                alt={product.name}
+                src={product.imageUrl}
+                alt={product.country}
+                width={100} height={100}
                 className="w-full h-48 object-cover rounded-lg mb-3"
               />
-              <p className="text-2xl font-bold text-center text-sky-700 mb-2">
-                {" "}
-                {product.country}
-              </p>
-              <p className="text-center text-sm italic text-gray-500">
-                {product.description}
-              </p>
+              <h3 className="text-center text-lg  font-bold text-sky-600">
+                {product.keyword}
+              </h3>
+              
               <p className="text-end  font-bold">$ {product.price}</p>
             </div>
           ))}

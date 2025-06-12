@@ -1,5 +1,8 @@
 
 import { prisma } from "../src/lib/script"
+// 별칭(Alias)이 Next.js에만 적용되고 ts-node에는 적용 안 됨 => 상대경로로 정확히 써야함
+// Next.js는 jsconfig.json 또는 tsconfig.json에서 paths 옵션으로 @를 src 등 특정 폴더로 매핑해서 사용.
+// 하지만 ts-node로 실행할 때는 그 별칭이 적용되지 않아서 경로를 못 찾음.
 
 // 여행상품 db에 추가하기
 async function main() {
