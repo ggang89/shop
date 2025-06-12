@@ -1,11 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import CountryList from "../../components/travel-list";
-import { Products } from "@/lib/product";
 import Link from "next/link";
+import { prisma } from "@/lib/script";
 
-export default function Product() {
+export default async function Product() {
+  const products = await prisma.product.findMany({});
   return (
     <div>
       <header className=" text-3xl font-bold text-center p-5">
@@ -32,26 +31,32 @@ export default function Product() {
 
       <section>
         <div className="flex flex-wrap justify-center gap-10 p-10 ">
-          {Products.map((product) => (
+          {products.map((product) => (
             <div
-              key={product.key}
+              key={product.id}
               className="w-[400px]  rounded-lg p-5 item-center shadow-lg hover:shadow-2xl transition-shadow duration-300 "
             >
+              <h2 className="text-2xl font-bold text-center text-sky-700 mb-2">
+                {product.country}
+              </h2>
               <Image
-                src={product.image}
-                alt={product.name}
+                src={product.imageUrl}
+                alt={product.country}
+                width={100}
+                height={100}
                 className="w-full h-48 object-cover rounded-lg mb-3"
               />
-              <Link href={`/protect/${product.key}`}>
+              <Link href={`/protect/${product.id}`}>
                 {" "}
                 <p className="text-2xl font-bold text-center text-sky-700 mb-2">
                   {" "}
                   {product.country}
                 </p>
               </Link>
-              <p className="text-center text-sm italic text-gray-500">
+              <h3 className="text-center text-lg  font-bold text-sky-600">
                 {product.keyword}
-              </p>
+              </h3>
+
               <p className="text-end  font-bold">$ {product.price}</p>
             </div>
           ))}
