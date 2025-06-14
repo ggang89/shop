@@ -1,11 +1,12 @@
-import { SessionOptions } from "iron-session";
+import { getIronSession, SessionOptions } from "iron-session";
+import { cookies } from "next/headers";
 
 export type Session = {
   name: string;
   id: number;
   email: string;
   isLoggedIn: boolean;
-}
+};
 
 export const sessionOptions: SessionOptions = {
   password: process.env.IRON_SESSION_SECRET as string,
@@ -15,13 +16,11 @@ export const sessionOptions: SessionOptions = {
   },
 };
 
-declare module "iron-session" {
-  interface IronSessionData {
-    user?: {
-      name: string;
-      id: number;
-      email: string;
-    };
-    isLoggedIn: boolean;
-  }
+
+export async function getIronSessionData() {
+  const session: Session = await getIronSession(
+    await cookies(),
+    sessionOptions
+  );
+  return session;
 }

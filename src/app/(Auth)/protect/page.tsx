@@ -4,7 +4,10 @@ import Link from "next/link";
 import { prisma } from "@/lib/script";
 
 export default async function Product() {
-  const products = await prisma.product.findMany({});
+ 
+  const products = await prisma.product.findMany({
+   
+  });
   return (
     <div>
       <header className=" text-3xl font-bold text-center p-5">

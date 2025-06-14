@@ -1,15 +1,17 @@
-
-
 import Image from "next/image";
 import { prisma } from "@/lib/script";
 import CountryList from "../components/travel-list";
-
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
+import { getIronSessionData, Session, sessionOptions } from "@/lib/session";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  
-  const products = await prisma.product.findMany({
-
-  })
+  const session = await getIronSessionData();
+  if (session.isLoggedIn) {
+    redirect("/protect");
+  }
+  const products = await prisma.product.findMany({});
 
   return (
     <div>
@@ -36,9 +38,7 @@ export default async function Home() {
       </section>
 
       <section>
-        
         <div className="flex flex-wrap justify-center gap-10 p-10 ">
-        
           {products.map((product) => (
             <div
               key={product.id}
@@ -50,13 +50,14 @@ export default async function Home() {
               <Image
                 src={product.imageUrl}
                 alt={product.country}
-                width={100} height={100}
+                width={100}
+                height={100}
                 className="w-full h-48 object-cover rounded-lg mb-3"
               />
               <h3 className="text-center text-lg  font-bold text-sky-600">
                 {product.keyword}
               </h3>
-              
+
               <p className="text-end  font-bold">$ {product.price}</p>
             </div>
           ))}
