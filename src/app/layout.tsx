@@ -28,7 +28,7 @@ export default async function RootLayout({
   // 루트 레이아웃에서 세션 받아와서
   // 있는지 없는지에 따라서 nav 다르게 그리기
   const session = await getIronSessionData();
-  console.log("session", session);
+  //console.log("session", session);
   const noAuthLinks = [
     { href: "/login", title: "로그인" },
     { href: "/register", title: "회원가입" },

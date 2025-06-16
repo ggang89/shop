@@ -1,16 +1,20 @@
+
 import { NextResponse, NextRequest } from "next/server";
+import { getIronSessionData } from "./lib/session";
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
-  const session = request.cookies.get("iron-session");
+export async function middleware(request: NextRequest) {
+  const session =  await getIronSessionData();
+  console.log("세션",session)
   const noLogin = !session;
-  const login = session && session.value;
+  const login = session.isLoggedIn === true;
   const { pathname } = request.nextUrl;
 
   // 로그인 한 사람이 이용할 수 있는 페이지
   const requireAuthPage = ["/protect", "/user", "/logout", "/write-board",];
+ 
   // 로그인 안 한 사람이 이용할 수 있는 페이지
-  const noAuthPage = ["/login", "/register",];
+  const noAuthPage = ["/","/login", "/register",];
 
   // 세션이 없으면(=로그인 안 한 사용자) 로그인 페이지로 리다이렉트
   if (noLogin && requireAuthPage.some((path) => pathname.startsWith(path))) {
