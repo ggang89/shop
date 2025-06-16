@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { prisma } from "@/lib/script";
-import CountryList from "../components/travel-list";
+import CountryList from "./components/travel-list";
 import { getIronSessionData } from "@/lib/session";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function Home() {
   const session = await getIronSessionData();
@@ -42,21 +43,26 @@ export default async function Home() {
               key={product.id}
               className="w-[400px]  rounded-lg p-5 item-center shadow-lg hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
             >
-              <h2 className="text-2xl font-bold text-center text-sky-700 mb-2">
-                {product.country}
-              </h2>
-              <Image
-                src={product.imageUrl}
-                alt={product.country}
-                width={100}
-                height={100}
-                className="w-full h-48 object-cover rounded-lg mb-3"
-              />
-              <h3 className="text-center text-lg  font-bold text-sky-600">
-                {product.keyword}
-              </h3>
+              {" "}
+              <Link href={`/${product.id}`}>
+                <h2 className="text-2xl font-bold text-center text-sky-900 mb-2">
+                  {product.country}
+                </h2>
+                <Image
+                  src={product.imageUrl}
+                  alt={product.country}
+                  width={100}
+                  height={100}
+                  className="w-full h-48 object-cover rounded-lg mb-3"
+                />
 
-              <p className="text-end  font-bold">$ {product.price}</p>
+               
+
+                <h3 className="text-center text-lg  font-bold text-sky-600">
+                  {product.keyword}
+                </h3>
+                <p className="text-end  font-bold">$ {product.price}</p>
+              </Link>
             </div>
           ))}
         </div>
