@@ -1,9 +1,7 @@
 import Image from "next/image";
 import { prisma } from "@/lib/script";
 import CountryList from "../components/travel-list";
-import { getIronSession } from "iron-session";
-import { cookies } from "next/headers";
-import { getIronSessionData, Session, sessionOptions } from "@/lib/session";
+import { getIronSessionData } from "@/lib/session";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
