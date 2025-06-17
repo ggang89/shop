@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { prisma } from "@/lib/script";
 import CountryList from "./components/travel-list";
-import { getIronSessionData } from "@/lib/session";
-import { redirect } from "next/navigation";
+// import { getIronSessionData } from "@/lib/session";
+// import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default async function Home() {
-  const session = await getIronSessionData();
-  if (session.isLoggedIn) {
-    redirect("/protect");
-  }
+  
+
   const products = await prisma.product.findMany({});
 
   return (

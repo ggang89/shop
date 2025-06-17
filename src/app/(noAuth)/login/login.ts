@@ -52,5 +52,5 @@ export async function LoginAction(data: Params) {
   session.isLoggedIn = true;
   await session.save();
 
-  redirect("/protect");
+  redirect("/");
 }
