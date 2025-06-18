@@ -28,14 +28,14 @@ export default async function DetailPage({
       />
 
       {/* 콘텐츠 */}
-      <div className="relative z-10 flex gap-x-40">
+      <div className="relative z-10 flex gap-40">
         <Image
           src={product.imageUrl}
           alt={product.country}
           width={700}
           height={700}
         />
-        <div className=" ">
+        <div className="">
           <h1 className="text-5xl font-bold mb-10"> {product.country}</h1>
           <h3 className="text-2xl font-bold italic text-gray-700 mb-3">
             {" "}
